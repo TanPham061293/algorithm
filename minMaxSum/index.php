@@ -20,6 +20,7 @@ $(document).ready(function(){
 <?php 
 $minTotal = 0;
 $maxTotal = 0;
+$Total    = 0;
 $arr      = array();
 $flag     = true;
     if (isset($_POST['input'])){
@@ -41,22 +42,11 @@ $flag     = true;
             if ($count == 5){
                 $min     = min($arr);
                 $max     = max($arr);
-                $flagmin = true;
-                $flagmax = true;
-                foreach ($arr as $keys => $values){
-                    if ($values == $min && $flagmin == true){
-                        $flagmin = false;
-                    }
-                    elseif ($values != $min || ($values == $min && $flagmin  == false)){
-                        $maxTotal +=  $values;
-                    }
-                    if ($values == $max && $flagmax == true){
-                        $flagmax = false;
-                    }
-                    elseif ($values != $max || ($values == $max && $flagmax == false)){
-                        $minTotal += $values;
-                    }
+                foreach ($arr as $keys =>$values){
+                    $Total += $values;
                 }
+                $minTotal = $Total - $max;
+                $maxTotal = $Total - $min;
             }else {
                 $flag = false;
             }
